@@ -1,3 +1,8 @@
+-- Using the example from the lesson, create a temporary table called employees_with_departments that contains first_name, last_name, and dept_name for employees currently with that department. Be absolutely sure to create this table on your own database. If you see "Access denied for user ...", it means that the query was attempting to write a new table to a database that you can only read.
+
+
+
+
 
 USE leavitt_1860;
 ALTER TABLE employees_with_departments 
@@ -8,7 +13,8 @@ drop gender,
 drop hire_date, 
 drop from_date, 
 drop to_date;
-
+-- Update the table so that full name column contains the correct data
+-- Remove the first_name and last_name columns from the table.
 SHOW CREATE TABLE employees_with_departments;
 ALTER TABLE employees_with_departments ADD full_name VARCHAR(30);
 UPDATE employees_with_departments SET full_name = CONCAT(first_name, ' ', last_name);
@@ -16,12 +22,15 @@ ALTER TABLE employees_with_departments
 drop first_name,
 drop last_name;
 
-
+-- What is another way you could have ended up with this same table?
 SELECT full_name AS 'Full Name', dept_name AS 'Department'
 FROM employees_with_departments
 ORDER BY dept_name, full_name
 LIMIT 20;
 
+
+-- create a temporary table based on the payment table from the sakila database.
+-- Write the SQL necessary to transform the amount column such that it is stored as an integer representing the number of cents of the payment. For example, 1.99 should become 199.
 
 CREATE temporary TABLE payment_copy AS
 SELECT * , amount * 100 as amount_in_pennies from sakila.payment;
@@ -34,6 +43,9 @@ LIMIT 10;
 DROP TABLE payment_copy;
 
 
+-- Find out how the current average pay in each department compares to the overall current pay for everyone at the company. In order to make the comparison easier, you should use the Z-score for salaries. In terms of salary, what is the best department right now to work for? The worst?
+
+-- Hint Consider that the following code will produce the z score for current salaries.
 
 
 CREATE temporary Table salary_avgs AS 
@@ -51,6 +63,8 @@ JOIN employees.departments ed USING (dept_no)
 WHERE ede.to_date > NOW() AND es.to_date > NOW()
 GROUP BY dept_name
 );
+
+
 SELECT * FROM departments_average_salary;
 
 ALTER TABLE departments_average_salary add overall_avg float(10,2);
