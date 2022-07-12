@@ -7,7 +7,7 @@ DESCRIBE dept_emp;
 -- Write a query that returns all employees, their department number, their start date, their end date, and a new column 'is_current_employee' that is a 1 if the employee is still with the company and 0 if not.
 
 
-SELECT concat(first_name, ' ', last_name) as 'Employee Name', de.dept_no, from_date, to_date,
+SELECT concat(first_name, ' ', last_name) as 'Employee Name', dept_emp.dept_no, from_date, to_date,
 IF (to_date > NOW(), TRUE, FALSE) AS is_current_employee
 FROM employees 
 JOIN dept_emp
