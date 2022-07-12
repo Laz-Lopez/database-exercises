@@ -128,6 +128,9 @@ WHERE dept_emp.to_date > now()
 ANd salaries.to_date >= NOW()
 group by departments.dept_name;
 
+SELECT CONCAT(employees.first_name, '  ',employees.last_name) AS Employee_name, departments.dept_name, 
+
+
 
 
 
