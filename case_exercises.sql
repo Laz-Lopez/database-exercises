@@ -17,7 +17,7 @@ GROUP BY dept_no, last_name, first_name, to_date, from_date;
 
 -- Write a query that returns all employee names (previous and current), and a new column 'alpha_group' that returns 'A-H', 'I-Q', or 'R-Z' depending on the first letter of their last name.
 
-SELECT first_name, last_name, de.dept_no, from_date, to_date,
+SELECT first_name, last_name, dept.emp.dept_no, from_date, to_date,
 CASE
 WHEN SUBSTRING(last_name, 1,1) BETWEEN 'A' AND 'H' THEN 'A-H'
 WHEN SUBSTRING(last_name, 1,1) BETWEEN 'I' AND 'Q' THEN 'I-Q'
